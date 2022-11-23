@@ -37,4 +37,13 @@ class PersonsListViewModel: ObservableObject {
     func removeData(_ offsets: IndexSet) {
         self.persons.remove(atOffsets: offsets)
     }
+    
+    func replacePerson(_ person: Person) {
+        if let idx = persons.firstIndex(where: {$0 == person}) {
+            persons.remove(at: idx)
+            persons.insert(person, at: idx)
+        }else{
+            persons.append(person)
+        }
+    }
 }

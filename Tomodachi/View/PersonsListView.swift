@@ -21,27 +21,16 @@ struct PersonsListView: View {
                 }
                 List {
                     ForEach(vm.persons, id: \.id) { person in
-                        NavigationLink(destination: PersonDetailsView.instance(person.id, vm)) {
-                            HStack {
-                                AsyncImage(url: person._picture) { image in
-                                    image
-                                        .resizable()
-                                        .cornerRadius(.infinity)
-                                }placeholder: {
-                                    ProgressView()
-                                }
-                                .frame(width: 45, height: 45)
-                                Text("\(person._displayName)")
-                            }
-                        }
+                        row(person)
                     }
                     .onDelete(perform: delete)
-                    
                 }
-                NavigationLink(destination: PersonDetailsView(vm: PersonDetailsViewModel(person: Person.example), parentVM: vm, isEdit: true), isActive: $addPeopleIsPresented, label: {
+                NavigationLink(destination: PersonDetailsView(
+                    vm: PersonDetailsViewModel(person: Person.example),
+                    parentVM: vm, isEdit: true
+                ), isActive: $addPeopleIsPresented, label: {
                     
                 })
-                
             }
             .navigationTitle("Tomodachi")
             .navigationBarTitleDisplayMode(.inline)
@@ -58,6 +47,25 @@ struct PersonsListView: View {
            
         }
         
+    }
+    
+    private func row(_ person: Person) -> some View {
+        NavigationLink(destination: PersonDetailsView.instance(person, vm)) {
+            HStack {
+                AsyncImage(url: person._picture) { image in
+                    image
+                        .resizable()
+                        .cornerRadius(.infinity)
+                }placeholder: {
+                    if person.picture == "" {
+                        Text("\(Image(systemName: "xmark.circle"))")
+                    }else{
+                        ProgressView()
+                    }                                }
+                .frame(width: 45, height: 45)
+                Text("\(person._displayName)")
+            }
+        }
     }
     
     

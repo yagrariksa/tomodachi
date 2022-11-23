@@ -23,7 +23,7 @@ struct PersonDetailsView: View {
                         .resizable()
                         .cornerRadius(.infinity)
                 } placeholder: {
-                    if vm.person.id == "" {
+                    if vm.person.picture == "" {
                         Text("No Image")
                     }else{
                         ProgressView()
@@ -32,131 +32,8 @@ struct PersonDetailsView: View {
                 .frame(width: 200, height: 200)
                 
                 List {
-                    Section(header: Text("General Info")) {
-                        HStack {
-                            Text("Title")
-                            Spacer()
-                            if isEdit {
-                                TextField("...", text: $person.title)
-                                    .fixedSize()
-                                    .frame(alignment: .trailing)
-                            }else {
-                                Text(vm.person.title)
-                            }
-                        }
-                        HStack {
-                            Text("First Name")
-                            Spacer()
-                            if isEdit {
-                                TextField("...", text: $person.firstName)
-                                    .fixedSize()
-                                    .frame(alignment: .trailing)
-                            }else {
-                                Text(vm.person.firstName)
-                            }
-                        }
-                        HStack {
-                            Text("Last Name")
-                            Spacer()
-                            if isEdit {
-                                TextField("...", text: $person.lastName)
-                                    .fixedSize()
-                                    .frame(alignment: .trailing)
-                            }else {
-                                Text(vm.person.lastName)
-                            }
-                        }
-                        HStack {
-                            Text("Email")
-                            Spacer()
-                            if isEdit {
-                                TextField("...", text: $person._email)
-                                    .fixedSize()
-                                    .frame(alignment: .trailing)
-                            }else {
-                                Text(vm.person.email ?? "")
-                            }
-                        }
-                        HStack {
-                            Text("Gender")
-                            Spacer()
-                            if isEdit {
-                                TextField("...", text: $person._gender)
-                                    .fixedSize()
-                                    .frame(alignment: .trailing)
-                            }else {
-                                Text(vm.person.gender ?? "")
-                            }
-                        }
-                        HStack {
-                            Text("Born")
-                            Spacer()
-                            if isEdit {
-                                TextField("...", text: $person._dateOfBirth)
-                                    .fixedSize()
-                                    .frame(alignment: .trailing)
-                            }else {
-                                Text(vm.person.dateOfBirth ?? "")
-                            }
-                        }
-                    }
-                    Section(header: Text("Location")) {
-                        HStack {
-                            Text("street")
-                            Spacer()
-                            if isEdit {
-                                TextField("...", text: $person._location.street)
-                                    .fixedSize()
-                                    .frame(alignment: .trailing)
-                            }else {
-                                Text(vm.person._location.street )
-                            }
-                        }
-                        HStack {
-                            Text("city")
-                            Spacer()
-                            if isEdit {
-                                TextField("...", text: $person._location.city)
-                                    .fixedSize()
-                                    .frame(alignment: .trailing)
-                            }else {
-                                Text(vm.person._location.city )
-                            }
-                        }
-                        HStack {
-                            Text("state")
-                            Spacer()
-                            if isEdit {
-                                TextField("...", text: $person._location.state)
-                                    .fixedSize()
-                                    .frame(alignment: .trailing)
-                            }else {
-                                Text(vm.person._location.state )
-                            }
-                        }
-                        HStack {
-                            Text("country")
-                            Spacer()
-                            if isEdit {
-                                TextField("...", text: $person._location.country)
-                                    .fixedSize()
-                                    .frame(alignment: .trailing)
-                            }else {
-                                Text(vm.person._location.country )
-                            }
-                        }
-                        HStack {
-                            Text("timezone")
-                            Spacer()
-                            if isEdit {
-                                TextField("...", text: $person._location.timezone)
-                                    .fixedSize()
-                                    .frame(alignment: .trailing)
-                            }else {
-                                Text(vm.person._location.timezone )
-                            }
-                        }
-                    }
+                    fieldSectionGeneral
+                    fieldSectionLocation
                 }
                 Spacer()
                     .navigationTitle("Detail Friends")
@@ -165,36 +42,67 @@ struct PersonDetailsView: View {
             .frame(width: geometry.size.width)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        isEdit.toggle()
-                        if isEdit {
-                            person = vm.person
-                        }else{
-                            if let idx = parentVM.persons.firstIndex(where: {$0 == person}) {
-                                parentVM.persons.remove(at: idx)
-                                parentVM.persons.insert(person, at: idx)
-//                                parentVM.persons.inser
-//                                parentVM.persons.first(where: {$0 == person}) = person
-                            }else{
-                                parentVM.persons.append(person)
-                            }
-                        }
-                    }, label: {
-                        if isEdit {
-                            Text("Save")
-                        }else{
-                            Text("\(Image(systemName: "pencil"))")
-                        }
+                    Button(action: editHandler, label: {
+                        Text(editToolbarText)
                     })
                 }
             }
         }
     }
+    
+    private var editToolbarText: String {
+        isEdit ? "Save" : "\(Image(systemName: "pencil"))"
+    }
+    
+    private func editHandler() {
+        isEdit.toggle()
+        if isEdit {
+            person = vm.person
+        }else{
+            parentVM.replacePerson(person)
+        }
+    }
+    
+    private func customTextField(_ label: String,_ textDisplayed: String, _ editing: Binding<String>) -> some View {
+        HStack {
+            Text(label)
+            Spacer()
+            if isEdit {
+                TextField("...", text: editing)
+                    .fixedSize()
+                    .frame(alignment: .trailing)
+            }else {
+                Text(textDisplayed )
+            }
+        }
+    }
+    
+    private var fieldSectionGeneral: some View {
+        Section(header: Text("General Info")) {
+            customTextField("Title",vm.person.title,$person.title)
+            customTextField("First Name",vm.person.firstName,$person.firstName)
+            customTextField("Last Name",vm.person.lastName,$person.lastName)
+            customTextField("Picture URL",vm.person.picture ,$person.picture)
+            customTextField("Email",vm.person._email,$person._email)
+            customTextField("Gender",vm.person._gender ,$person._gender)
+            customTextField("Born",vm.person._dateOfBirth,$person._dateOfBirth)
+        }
+    }
+    
+    private var fieldSectionLocation: some View {
+        Section(header: Text("Location")) {
+            customTextField("street", vm.person._location.street, $person._location.street)
+            customTextField("city", vm.person._location.city, $person._location.city )
+            customTextField("state", vm.person._location.state, $person._location.state )
+            customTextField("country", vm.person._location.country, $person._location.country )
+            customTextField("timezone", vm.person._location.timezone, $person._location.timezone )
+        }
+    }
 }
 
 extension PersonDetailsView {
-    public static func instance(_ id: String,_ pvm: PersonsListViewModel) -> PersonDetailsView {
-        return PersonDetailsView(vm: PersonDetailsViewModel.instance(id), parentVM: pvm)
+    public static func instance(_ person: Person,_ pvm: PersonsListViewModel) -> PersonDetailsView {
+        return PersonDetailsView(vm: PersonDetailsViewModel.instance(person), parentVM: pvm)
     }
 }
 

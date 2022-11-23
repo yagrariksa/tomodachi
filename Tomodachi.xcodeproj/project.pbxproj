@@ -11,7 +11,6 @@
 		40175C51292C79D8008A8A3F /* PersonDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40175C50292C79D8008A8A3F /* PersonDetailsView.swift */; };
 		40175C53292C79FC008A8A3F /* PersonsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40175C52292C79FC008A8A3F /* PersonsListViewModel.swift */; };
 		40175C5C292C968F008A8A3F /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40175C5B292C968F008A8A3F /* Constant.swift */; };
-		40175C5E292CA51F008A8A3F /* AddFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40175C5D292CA51F008A8A3F /* AddFriendView.swift */; };
 		40952116292C650300FFB785 /* TomodachiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40952115292C650300FFB785 /* TomodachiApp.swift */; };
 		40952118292C650300FFB785 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40952117292C650300FFB785 /* ContentView.swift */; };
 		4095211A292C650400FFB785 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40952119292C650400FFB785 /* Assets.xcassets */; };
@@ -48,7 +47,6 @@
 		40175C50292C79D8008A8A3F /* PersonDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetailsView.swift; sourceTree = "<group>"; };
 		40175C52292C79FC008A8A3F /* PersonsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonsListViewModel.swift; sourceTree = "<group>"; };
 		40175C5B292C968F008A8A3F /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
-		40175C5D292CA51F008A8A3F /* AddFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendView.swift; sourceTree = "<group>"; };
 		40952112292C650300FFB785 /* Tomodachi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tomodachi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40952115292C650300FFB785 /* TomodachiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TomodachiApp.swift; sourceTree = "<group>"; };
 		40952117292C650300FFB785 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -109,7 +107,6 @@
 			children = (
 				40175C4D292C79AA008A8A3F /* PersonsListView.swift */,
 				40175C50292C79D8008A8A3F /* PersonDetailsView.swift */,
-				40175C5D292CA51F008A8A3F /* AddFriendView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -384,7 +381,6 @@
 				40D447AA292DDABA00A5D256 /* Person.swift in Sources */,
 				40952122292C650400FFB785 /* Tomodachi.xcdatamodeld in Sources */,
 				40D447A5292DD85500A5D256 /* PersonDetailsViewModel.swift in Sources */,
-				40175C5E292CA51F008A8A3F /* AddFriendView.swift in Sources */,
 				40952116292C650300FFB785 /* TomodachiApp.swift in Sources */,
 				40175C51292C79D8008A8A3F /* PersonDetailsView.swift in Sources */,
 				40D447AB292DDABA00A5D256 /* Location.swift in Sources */,

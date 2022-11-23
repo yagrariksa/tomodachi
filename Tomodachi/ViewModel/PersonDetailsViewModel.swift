@@ -21,6 +21,9 @@ class PersonDetailsViewModel: ObservableObject {
     init(person: Person) {
         self.id = person.id
         self.person = person
+        if person.email == nil {
+            self.loadData()
+        }   
     }
     
     func loadData() {
@@ -31,7 +34,7 @@ class PersonDetailsViewModel: ObservableObject {
         }
     }
     
-    public static func instance(_ id: String) -> PersonDetailsViewModel {
-        return PersonDetailsViewModel(id: id)
+    public static func instance(_ person: Person) -> PersonDetailsViewModel {
+        return PersonDetailsViewModel(person: person)
     }
 }
