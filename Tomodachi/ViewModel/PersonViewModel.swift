@@ -15,13 +15,14 @@ struct ListPersonDataStruct: Decodable {
     let data: [Person]
 }
 
-class PersonsListViewModel: ObservableObject {
+class PersonViewModel: ObservableObject {
     
     private let parameters = [
         "limit": 50
     ]
     
     @Published var persons: [Person] = []
+    @Published var person: Person = Person.example
     
     init() {
         loadData()
@@ -44,6 +45,15 @@ class PersonsListViewModel: ObservableObject {
             persons.insert(person, at: idx)
         }else{
             persons.append(person)
+        }
+    }
+    
+    func loadPerson() {
+        AF.request(DUMMY_URL + "/\(self.person.id)", headers: DUMMY_HEADERS).responseDecodable(of: Person.self) { response in
+            if case .success(let result) = response.result {
+                self.person = result
+                self.replacePerson(self.person)
+            }
         }
     }
 }

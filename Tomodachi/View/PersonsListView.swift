@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct PersonsListView: View {
-    @StateObject private var vm: PersonsListViewModel = PersonsListViewModel()
-    @Environment(\.editMode) var editMode
+    @StateObject private var vm: PersonViewModel = PersonViewModel()
+    
+    @State var edit: Bool = false
     
     @State var addPeopleIsPresented: Bool = false
     
@@ -26,8 +27,7 @@ struct PersonsListView: View {
                     .onDelete(perform: delete)
                 }
                 NavigationLink(destination: PersonDetailsView(
-                    vm: PersonDetailsViewModel(person: Person.example),
-                    parentVM: vm, isEdit: true
+                    vm: vm, isEdit: edit
                 ), isActive: $addPeopleIsPresented, label: {
                     
                 })
@@ -40,7 +40,7 @@ struct PersonsListView: View {
             .toolbar {
                 ToolbarItem(placement: .navigation) {
                     Button("Add") {
-                        addPeopleIsPresented.toggle()
+                        showDetails(true, Person.example)
                     }
                 }
             }
@@ -50,7 +50,9 @@ struct PersonsListView: View {
     }
     
     private func row(_ person: Person) -> some View {
-        NavigationLink(destination: PersonDetailsView.instance(person, vm)) {
+        Button(action: {
+            showDetails(false, person)
+        }) {
             HStack {
                 AsyncImage(url: person._picture) { image in
                     image
@@ -66,6 +68,7 @@ struct PersonsListView: View {
                 Text("\(person._displayName)")
             }
         }
+        .buttonStyle(.plain)
     }
     
     
@@ -73,8 +76,10 @@ struct PersonsListView: View {
         vm.removeData(offsets)
     }
     
-    private func showSheet() {
+    private func showDetails(_ edit: Bool, _ person: Person) {
         addPeopleIsPresented.toggle()
+        self.vm.person = person
+        self.edit = edit
     }
     
 }

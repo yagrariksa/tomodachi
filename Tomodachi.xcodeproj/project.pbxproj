@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		40175C4E292C79AA008A8A3F /* PersonsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40175C4D292C79AA008A8A3F /* PersonsListView.swift */; };
 		40175C51292C79D8008A8A3F /* PersonDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40175C50292C79D8008A8A3F /* PersonDetailsView.swift */; };
-		40175C53292C79FC008A8A3F /* PersonsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40175C52292C79FC008A8A3F /* PersonsListViewModel.swift */; };
+		40175C53292C79FC008A8A3F /* PersonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40175C52292C79FC008A8A3F /* PersonViewModel.swift */; };
 		40175C5C292C968F008A8A3F /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40175C5B292C968F008A8A3F /* Constant.swift */; };
 		40952116292C650300FFB785 /* TomodachiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40952115292C650300FFB785 /* TomodachiApp.swift */; };
 		40952118292C650300FFB785 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40952117292C650300FFB785 /* ContentView.swift */; };
@@ -19,7 +19,6 @@
 		4095212C292C650500FFB785 /* TomodachiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4095212B292C650500FFB785 /* TomodachiTests.swift */; };
 		40952136292C650500FFB785 /* TomodachiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40952135292C650500FFB785 /* TomodachiUITests.swift */; };
 		40952138292C650500FFB785 /* TomodachiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40952137292C650500FFB785 /* TomodachiUITestsLaunchTests.swift */; };
-		40D447A5292DD85500A5D256 /* PersonDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D447A4292DD85500A5D256 /* PersonDetailsViewModel.swift */; };
 		40D447AA292DDABA00A5D256 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D447A8292DDABA00A5D256 /* Person.swift */; };
 		40D447AB292DDABA00A5D256 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D447A9292DDABA00A5D256 /* Location.swift */; };
 		E0D0FA207A2896DE7CA8083E /* Pods_Tomodachi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A1741127DA15D408A37149A /* Pods_Tomodachi.framework */; };
@@ -45,7 +44,7 @@
 /* Begin PBXFileReference section */
 		40175C4D292C79AA008A8A3F /* PersonsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonsListView.swift; sourceTree = "<group>"; };
 		40175C50292C79D8008A8A3F /* PersonDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetailsView.swift; sourceTree = "<group>"; };
-		40175C52292C79FC008A8A3F /* PersonsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonsListViewModel.swift; sourceTree = "<group>"; };
+		40175C52292C79FC008A8A3F /* PersonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonViewModel.swift; sourceTree = "<group>"; };
 		40175C5B292C968F008A8A3F /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		40952112292C650300FFB785 /* Tomodachi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tomodachi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40952115292C650300FFB785 /* TomodachiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TomodachiApp.swift; sourceTree = "<group>"; };
@@ -59,7 +58,6 @@
 		40952131292C650500FFB785 /* TomodachiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TomodachiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		40952135292C650500FFB785 /* TomodachiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TomodachiUITests.swift; sourceTree = "<group>"; };
 		40952137292C650500FFB785 /* TomodachiUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TomodachiUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		40D447A4292DD85500A5D256 /* PersonDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonDetailsViewModel.swift; sourceTree = "<group>"; };
 		40D447A8292DDABA00A5D256 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		40D447A9292DDABA00A5D256 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		547BE3A8BC9EEEC0558E2C49 /* Pods-Tomodachi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tomodachi.debug.xcconfig"; path = "Target Support Files/Pods-Tomodachi/Pods-Tomodachi.debug.xcconfig"; sourceTree = "<group>"; };
@@ -114,8 +112,7 @@
 		40175C54292C7A02008A8A3F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				40D447A4292DD85500A5D256 /* PersonDetailsViewModel.swift */,
-				40175C52292C79FC008A8A3F /* PersonsListViewModel.swift */,
+				40175C52292C79FC008A8A3F /* PersonViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -374,13 +371,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40175C53292C79FC008A8A3F /* PersonsListViewModel.swift in Sources */,
+				40175C53292C79FC008A8A3F /* PersonViewModel.swift in Sources */,
 				4095211F292C650400FFB785 /* Persistence.swift in Sources */,
 				40952118292C650300FFB785 /* ContentView.swift in Sources */,
 				40175C4E292C79AA008A8A3F /* PersonsListView.swift in Sources */,
 				40D447AA292DDABA00A5D256 /* Person.swift in Sources */,
 				40952122292C650400FFB785 /* Tomodachi.xcdatamodeld in Sources */,
-				40D447A5292DD85500A5D256 /* PersonDetailsViewModel.swift in Sources */,
 				40952116292C650300FFB785 /* TomodachiApp.swift in Sources */,
 				40175C51292C79D8008A8A3F /* PersonDetailsView.swift in Sources */,
 				40D447AB292DDABA00A5D256 /* Location.swift in Sources */,

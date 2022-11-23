@@ -8,22 +8,23 @@
 import SwiftUI
 
 struct PersonDetailsView: View {
-    @StateObject var vm: PersonDetailsViewModel
-    @ObservedObject var parentVM: PersonsListViewModel
+    @ObservedObject var vm: PersonViewModel
     
-    @State var person = Person.example
+    var person: Person {
+        vm.person
+    }
     @State var isEdit: Bool = false
     
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .center, spacing: 16) {
                 Spacer()
-                AsyncImage(url: vm.person._picture) { image in
+                AsyncImage(url: person._picture) { image in
                     image
                         .resizable()
                         .cornerRadius(.infinity)
                 } placeholder: {
-                    if vm.person.picture == "" {
+                    if person.picture == "" {
                         Text("No Image")
                     }else{
                         ProgressView()
@@ -36,30 +37,28 @@ struct PersonDetailsView: View {
                     fieldSectionLocation
                 }
                 Spacer()
-                    .navigationTitle("Detail Friends")
-                    .navigationBarTitleDisplayMode(.inline)
+                    
             }
             .frame(width: geometry.size.width)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: editHandler, label: {
-                        Text(editToolbarText)
-                    })
+                    Button(action: editHandler, label: {editToolbarText})
                 }
             }
+            .onAppear(perform: vm.loadPerson)
+            .navigationTitle("Detail Friends")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
     
-    private var editToolbarText: String {
-        isEdit ? "Save" : "\(Image(systemName: "pencil"))"
+    private var editToolbarText: Text {
+        Text(isEdit ? "Save" : "\(Image(systemName: "pencil"))")
     }
     
     private func editHandler() {
         isEdit.toggle()
-        if isEdit {
-            person = vm.person
-        }else{
-            parentVM.replacePerson(person)
+        if !isEdit {
+            vm.replacePerson(person)
         }
     }
     
@@ -79,36 +78,36 @@ struct PersonDetailsView: View {
     
     private var fieldSectionGeneral: some View {
         Section(header: Text("General Info")) {
-            customTextField("Title",vm.person.title,$person.title)
-            customTextField("First Name",vm.person.firstName,$person.firstName)
-            customTextField("Last Name",vm.person.lastName,$person.lastName)
-            customTextField("Picture URL",vm.person.picture ,$person.picture)
-            customTextField("Email",vm.person._email,$person._email)
-            customTextField("Gender",vm.person._gender ,$person._gender)
-            customTextField("Born",vm.person._dateOfBirth,$person._dateOfBirth)
+            customTextField("Title", person.title, $vm.person.title)
+            customTextField("First Name", person.firstName, $vm.person.firstName)
+            customTextField("Last Name", person.lastName, $vm.person.lastName)
+            customTextField("Picture URL", person.picture , $vm.person.picture)
+            customTextField("Email", person._email, $vm.person._email)
+            customTextField("Gender", person._gender , $vm.person._gender)
+            customTextField("Born", person._dateOfBirth, $vm.person._dateOfBirth)
         }
     }
     
     private var fieldSectionLocation: some View {
         Section(header: Text("Location")) {
-            customTextField("street", vm.person._location.street, $person._location.street)
-            customTextField("city", vm.person._location.city, $person._location.city )
-            customTextField("state", vm.person._location.state, $person._location.state )
-            customTextField("country", vm.person._location.country, $person._location.country )
-            customTextField("timezone", vm.person._location.timezone, $person._location.timezone )
+            customTextField("street", person._location.street, $vm.person._location.street)
+            customTextField("city", person._location.city, $vm.person._location.city )
+            customTextField("state", person._location.state, $vm.person._location.state )
+            customTextField("country", person._location.country, $vm.person._location.country )
+            customTextField("timezone", person._location.timezone, $vm.person._location.timezone )
         }
     }
 }
 
 extension PersonDetailsView {
-    public static func instance(_ person: Person,_ pvm: PersonsListViewModel) -> PersonDetailsView {
-        return PersonDetailsView(vm: PersonDetailsViewModel.instance(person), parentVM: pvm)
+    public static func instance(_ pvm: PersonViewModel) -> PersonDetailsView {
+        return PersonDetailsView(vm: pvm)
     }
 }
 
 
 struct FriendDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        PersonDetailsView(vm: PersonDetailsViewModel(id: "60d0fe4f5311236168a109d8"), parentVM: PersonsListViewModel())
+        PersonDetailsView(vm: PersonViewModel())
     }
 }

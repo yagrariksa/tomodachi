@@ -119,6 +119,14 @@ extension Person {
     var _displayName: String {
         [title, _simpleName].joined(separator: " ")
     }
+    
+    var _dataFull: Bool {
+        if [_email, _gender, _dateOfBirth, _phone, _registerDate, _updatedDate].contains(where: {$0 == ""}) {
+            return false
+        }else{
+            return true
+        }
+    }
 }
 
 extension Person {
